@@ -1,5 +1,5 @@
 # Set default MYSQL_URL if not set
-MYSQL_URL ?= 'mysql://root:root@tcp(localhost:3306)/simpleForum'
+MYSQL_URL ?= 'mysql://root:secret@tcp(localhost:3306)/simpleForum'
 
 # Cek apakah migrate terinstal
 check-migrate:

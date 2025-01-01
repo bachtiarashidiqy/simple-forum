@@ -1,0 +1,5 @@
+service:
+  port: ":9999"
+  secret_jwt: "fastcampus-simpleforum"
+database:
+  data_source_name: "root:secret@tcp(localhost:3306)/simpleForum?parseTime=true"
