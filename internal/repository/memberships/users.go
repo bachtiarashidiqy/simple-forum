@@ -20,3 +20,12 @@ func (r *repository) GetUser(ctx context.Context, email, username string) (*memb
 	}
 	return &response, nil
 }
+
+func (r *repository) CreateUser(ctx context.Context, user *memberships.UserModel) error {
+	query := `INSERT INTO users (email, username, password, created_at, updated_at, created_by, updated_by) VALUES (?, ?, ?, ?, ?, ?, ?)`
+	_, err := r.db.ExecContext(ctx, query, user.Email, user.Username, user.Password, user.CreatedAt, user.UpdatedAt, user.CreatedBy, user.UpdatedBy)
+	if err != nil {
+		return err
+	}
+	return nil
+}
