@@ -12,15 +12,17 @@ type membershipService interface {
 
 type Handler struct {
 	*gin.Engine
+	membershipSvc membershipService
 }
 
-func NewHandler(api *gin.Engine) *Handler {
+func NewHandler(api *gin.Engine, membershipSvc membershipService) *Handler {
 	return &Handler{
-		Engine: api,
+		Engine:        api,
+		membershipSvc: membershipSvc,
 	}
 }
 
 func (h *Handler) RegisterRoute() {
 	route := h.Group("/memberships")
-	route.GET("/sing-up", h.SingUp)
+	route.POST("/sing-up", h.SingUp)
 }
