@@ -2,7 +2,9 @@ package main
 
 import (
 	"github.com/bachtiarashidiqy/simple-forum/internal/configs"
+	"github.com/bachtiarashidiqy/simple-forum/internal/handler/memberships"
 	membershipRepo "github.com/bachtiarashidiqy/simple-forum/internal/repository/memberships"
+	membershipSvc "github.com/bachtiarashidiqy/simple-forum/internal/service/memberships"
 	"github.com/bachtiarashidiqy/simple-forum/pkg/internalsql"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -26,7 +28,10 @@ func main() {
 	if err != nil {
 		log.Fatal("error connecting to database", err)
 	}
-	_ := membershipRepo.NewRepository(db)
+	membershipRepository := membershipRepo.NewRepository(db)
+	membershipService := membershipSvc.NewService(cfg, membershipRepository)
+	membershipHandler := memberships.NewHandler(r, membershipService)
+	membershipHandler.RegisterRoute()
 	err = r.Run(cfg.Service.Port)
 	if err != nil {
 		return
