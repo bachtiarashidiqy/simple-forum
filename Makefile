@@ -1,7 +1,7 @@
 # Set default MYSQL_URL if not set
-MYSQL_URL ?= 'mysql://root:secret@tcp(localhost:3306)/simpleForum'
+include .env
+MYSQL_URL ?= "mysql://root:$(MYSQL_ROOT_PASSWORD)@tcp(localhost:3306)/$(MYSQL_DATABASE)"
 
-# Cek apakah migrate terinstal
 check-migrate:
 	@which migrate > /dev/null || (echo "migrate not installed, please install it first" && exit 1)
 
