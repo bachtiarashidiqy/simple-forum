@@ -15,6 +15,12 @@ type (
 )
 
 type (
+	LoginResponse struct {
+		AccessToken string `json:"access_token"`
+	}
+)
+
+type (
 	UserModel struct {
 		ID        int64     `db:"id"`
 		Username  string    `db:"username"`
